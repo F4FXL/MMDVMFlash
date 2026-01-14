@@ -18,15 +18,12 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Optionnel mais conseillé: tuer les trucs qui ouvrent le port série
-sudo systemctl disable --now ModemManager.service 2>/dev/null || true
-
-# Etat propre
+# Init cleanly
 pinctrl $NRST op dh
 pinctrl $BOOT op dl
 sleep 0.2
 
-# Entrer bootloader
+# Enter bootloader
 pinctrl $BOOT op dh
 sleep 0.2
 pinctrl $NRST op dl
